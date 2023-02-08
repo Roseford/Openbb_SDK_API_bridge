@@ -1,4 +1,7 @@
+import datetime
+from typing import Union
 from enum import Enum
+from pydantic import BaseModel
 
 class StockInterval(Enum):
     ONE_MIN = "1"
@@ -13,3 +16,26 @@ class StockAnalysis(Enum):
     EXCHANGE2 = "EDGX" 
     EXCHENGE3 = "BYX"
     EXCHANGE4 = "EDGA"
+
+class StockInfoResult(BaseModel):
+    Values: dict
+
+class StockDataResult(BaseModel):
+    Open: float
+    High: float
+    Low: float
+    Close: float
+    #Adj_Close: float
+    Volume: int
+    time: datetime.datetime
+
+class StockSpreadResult(BaseModel):
+    symbol: str
+    bids: float
+    asks: float
+    timestamp: None
+    datetime: None
+    nonce: int
+
+class StockYieldResult(BaseModel):
+    Dividends: dict
