@@ -2,7 +2,7 @@ import datetime
 from fastapi import APIRouter
 from openbb_terminal.sdk import openbb
 from typing import Optional, Union
-from app.schemas.stocks import StockAnalysis, StockInterval, StockDataResult, StockYieldResult, StockInfoResult
+from app.schemas.stocks import StockAnalysis, StockInterval, StockDataResult, StockYieldResult, StockInfoResult, StockSpreadResult
 
 
 router = APIRouter(tags=["stocks"], prefix="/stocks")
@@ -34,7 +34,7 @@ verbose:Optional[bool] = True
     return stocks_todict
 
 
-@router.get("/stockspead/")
+@router.get("/stockspead/", response_model=list[list[StockSpreadResult]])
 def stock_spread(
     symbol: str, 
     exchange: Optional[StockAnalysis] = StockAnalysis.EXCHANGE1
@@ -48,7 +48,8 @@ def stock_spread(
 @router.get("/yieldanalysis/", response_model=StockYieldResult)
 def stock_yield(symbol: str):
     syield = openbb.stocks.fa.divs(symbol)
-    syield["Dividends"] = syield["Dividends"].astype(str)
-    syield_todict = syield[["Dividends"]].to_dict()
-    return syield_todict
+    # syield["Dividends"] = syield["Dividends"].astype(str)
+    # syield_todict = syield[["Dividends"]].to_dict()
+    # return syield_todict
+    return syield
 

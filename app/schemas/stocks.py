@@ -25,17 +25,13 @@ class StockDataResult(BaseModel):
     High: float
     Low: float
     Close: float
-    #Adj_Close: float
+    #AdjClose: float
     Volume: int
     time: datetime.datetime
 
 class StockSpreadResult(BaseModel):
-    symbol: str
-    bids: float
-    asks: float
-    timestamp: None
-    datetime: None
-    nonce: int
+   Size: int
+   Price: float
 
 class StockYieldResult(BaseModel):
     Dividends: dict
