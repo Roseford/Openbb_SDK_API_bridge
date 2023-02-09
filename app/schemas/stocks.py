@@ -25,6 +25,11 @@ class StockDataResult(BaseModel):
     High: float
     Low: float
     Close: float
+    Adj_Close: float
+    class Config:
+        fields = {
+            "Adj_Close": {"alias": "Adj Close"}
+        }
     #AdjClose: float
     Volume: int
     time: datetime.datetime
