@@ -39,14 +39,10 @@ def stock_spread(
     symbol: str, 
     exchange: Optional[StockAnalysis] = StockAnalysis.EXCHANGE1
     ):
-    while True:
-        try:
-            df1,df2 = openbb.stocks.tob(symbol, exchange.value)
-            df1_todict = df1.to_dict(orient = "records")
-            df2_todict = df2.to_dict(orient = "records")
-            return df1_todict, df2_todict
-        except Exception as error:
-            return error
+    df1,df2 = openbb.stocks.tob(symbol, exchange.value)
+    df1_todict = df1.to_dict(orient = "records")
+    df2_todict = df2.to_dict(orient = "records")
+    return df1_todict, df2_todict
     
 
 @router.get("/yieldanalysis/", response_model=StockYieldResult)
