@@ -25,7 +25,7 @@ def crypto_data(symbol: str, start_date: Optional[Union[datetime.datetime, str, 
 
 
 @router.get("/cryptospread/", response_model=list[CryptoSpreadResult])
-def crypto_spread(exchange: str, symbol: str, to_symbol: str):
+def crypto_spread(symbol: str, to_symbol: str, exchange: Optional[str] = "kucoin"):
     data = openbb.crypto.dd.ob(exchange, symbol, to_symbol)
     df = pd.DataFrame(data)
     df_todict = df.to_dict(orient= "records")
