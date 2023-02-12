@@ -12,9 +12,6 @@ def get_news(
     sources: Optional[str] = "",
     sort: Optional[str] = "published"
 ):
-    '''
-    hbcducbsnchcsuh
-    '''
     news = openbb.news(term, sources, sort)
     news_todict = news.to_dict(orient = "records")
     return news_todict

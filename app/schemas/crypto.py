@@ -31,8 +31,8 @@ class CryptoSpreadResult(BaseModel):
     symbol: str
     bids: list[float]
     asks: list[float]
-    timestamp: None
-    datetime: None
+    timestamp: Union[int, None]
+    datetime: Union[str, None]
     nonce: int
 
 class CryptoYieldResult(BaseModel):
