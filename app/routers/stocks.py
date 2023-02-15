@@ -45,11 +45,13 @@ def stock_spread(
     return df1_todict, df2_todict
     
 
-@router.get("/yieldanalysis/", response_model=StockYieldResult)
+@router.get("/yieldanalysis/", response_model=Union[str, StockYieldResult])
 def stock_yield(symbol: str):
     syield = openbb.stocks.fa.divs(symbol)
-    # syield["Dividends"] = syield["Dividends"].astype(str)
-    # syield_todict = syield[["Dividends"]].to_dict()
-    # return syield_todict
-    return syield
+    if syield.empty:
+        return "No dividends found for this stock."  
+    else:
+        syield["Dividends"] = syield["Dividends"].astype(str)
+        syield_todict = syield[["Dividends"]].to_dict()
+        return syield_todict
 
