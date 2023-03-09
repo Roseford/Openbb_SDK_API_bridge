@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from app.routers import crypto
 from app.routers import stocks
 from app.routers import news
+from app.routers import forex
 
 
 app = FastAPI()
@@ -17,4 +18,5 @@ app.add_middleware(
 app.include_router(news.router)
 app.include_router(crypto.router)
 app.include_router(stocks.router)
+app.include_router(forex.router)
 
