@@ -32,6 +32,12 @@ class ForexDataResult(BaseModel):
     time: datetime.datetime
     
 
-# class ForexSpreadResult(BaseModel):
-    
+class ForexSpreadResult(BaseModel):
+    Ask: float
+    Bid: float
+    Mid: float
+    Points: float
+   
+
 # class ForexQuoteResult(BaseModel):
+    # 0: dict

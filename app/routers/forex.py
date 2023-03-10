@@ -2,12 +2,12 @@ import pandas as pd
 from fastapi import APIRouter
 from openbb_terminal.sdk import openbb
 from typing import Optional
-from app.schemas.forex import ForexInterval
+from app.schemas.forex import ForexInterval, ForexDataResult, ForexSpreadResult
 
 router = APIRouter(tags=["forex"], prefix="/forex")
 
 
-@router.get("/data")
+@router.get("/data", response_model=list[ForexDataResult])
 def forex_data(
     to_symbol: str,
     from_symbol: str,
@@ -23,7 +23,7 @@ def forex_data(
     return data_todict
 
 
-@router.get("/spreadanlysis")
+@router.get("/spreadanlysis", response_model=list[ForexSpreadResult])
 def forex_spread(
     to_symbol: str = "USD",
     from_symbol: str = "EUR"
@@ -35,6 +35,6 @@ def forex_spread(
 @router.get("/quote")
 def forex_quote(symbol: str, source: str = "YahooFinance"):
     quote = openbb.forex.quote(symbol, source)
-    quote_todict = quote.to_dict(orient="records")
-    return quote
+    quote_todict = quote.to_dict()
+    return quote_todict
 
