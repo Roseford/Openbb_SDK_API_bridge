@@ -1,3 +1,5 @@
+# ABOUT
+
 Welcome to **OPENBB SDK API BRIDGE**, a dynamic and innovative project aimed at revolutionizing the world of finance. Our mission is to provide developers and financial enthusiasts with seamless access to powerful financial data and functionalities through our API.
 
 ## Project Overview
