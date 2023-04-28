@@ -6,8 +6,9 @@ This project is a finance application built using Python/Conda/FastApi. It serve
 
 - [Introduction](#introduction)
 - [Credits](#credits)
+- [Setup](#setup)
 - [Getting Started](#getting-started)
-- [Usage](#usage)
+- [Conclusion](#conclusion)
 
 ## Introduction <a name="introduction"></a>
 
@@ -25,103 +26,81 @@ This project utilizes the functionality and codebase from the [OPENBB SDK](https
 
 Please visit the [OPENBB SDK](https://my.openbb.co/app/sdk) to learn more about their project and explore their other resources.
 
+## Setup <a name="setup"></a>
+
+Follow these steps to set up the project on your local machine:
+
+### Prerequisites
+
+**Conda:** Make sure you have Conda installed. You can download and install Conda from the official Anaconda website:
+
+    https://www.anaconda.com/products/individual
+
+### Clone the Repository
+
+Clone the project repository using Git with the command:
+
+    git clone https://github.com/Roseford/Openbb_SDK_API_bridge.git
+
+### Create and Activate the Conda Environment
+
+Navigate to the project directory and create a new Conda environment from the provided environment.yml file with these commands:
+
+    cd Openbb_SDK_API_bridge
+
+    conda env create -f environment.yml
+
+### Activate the Conda environment.
+
+    conda activate obb
+
+### Run the FastAPI Application
+
+With the Conda environment activated, navigate to the project's main directory and start the FastAPI application.
+
+    cd Openbb_SDK_API_bridge
+
+    uvicorn app.main:app --reload
+
+Open your web browser and visit **http://localhost:8000/docs** to access the running FastAPI application via FastApi's Swagger UI.
+
+That's it! You have now set up the project on your local machine using Conda and can start exploring and working with the FastAPI application. Check "Getting Started" section below for how to begin.
+
 ## Getting Started <a name="getting-started"></a>
 
-To get started with our API, follow these steps:
+Follow these steps to get started with the FastAPI app and explore the Swagger UI for API documentation:
 
-- Choose an endpoint: Our API provides three endpoints for accessing financial data: /stocks, /forex, and /crypto. Choose the endpoint that corresponds to the data you're interested in.
-- Make a request: Once you've chosen an endpoint, you can make a request to our API by sending an HTTP GET request to the appropriate URL. The response will be returned in JSON format, which you can then parse and use in your application.
+### Set Up the FastAPI App
 
-> For more information on how to use our API, see the "Usage" section below. Please note that currently there is no authentication required to access the API.
+Make sure you have completed the **Setup** instructions above to install the necessary dependencies and start the FastAPI application.
 
-## Usage <a name="usage"></a>
+### Access the Swagger UI
 
-### Endpoints
+Open your web browser and navigate to
+http://localhost:8000/docs
 
-Our API provides the following endpoints for accessing financial data:
+This is the default URL for the FastAPI Swagger UI.
 
-**/stocks:** Get stock data for a specific company.
-**/forex:** Get forex data for a specific currency pair.
-**/crypto:** Get cryptocurrency data for a specific currency.
+The Swagger UI provides a user-friendly interface to explore and interact with the API endpoints. You can view the available endpoints, their input/output schemas, and even send test requests directly from the UI.
 
-### Schemas
+Click on the desired endpoint to expand it and see more details, including the HTTP methods it supports, the expected request parameters, and the response structure.
 
-Examples of the JSON schemas our API uses to define the structure of the data returned by each endpoint:
+To test an API endpoint, click on the **Try it out** button for that endpoint. This allows you to enter sample or test data for the request parameters and execute the request to see the response.
 
-### Stock Data Schema
+The Swagger UI also provides automatic request validation, parameter descriptions, and sample values, making it easier to understand and interact with the API.
 
-    {
-    "symbol": "AAPL",
-    "price": 127.21,
-    "volume": 1234567,
-    "change": -0.85
-    }
+### Explore API Documentation
 
-### Forex Data Schema
+Apart from the Swagger UI, FastAPI generates a ReDoc interface that provides a clean and interactive documentation view. You can access it at
+http://localhost:8000/redoc.
 
-    {
-    "pair": "EUR/USD",
-    "bid": 1.2034,
-    "ask": 1.2044,
-    "spread": 0.001
-    }
+Additionally, the FastAPI app also generates detailed API documentation in OpenAPI format.
 
-### Crypto Data Schema
+To access the raw OpenAPI JSON specification, you can visit
+http://localhost:8000/openapi.json.
 
-    {
-    "symbol": "BTC",
-    "price": 56789.01,
-    "volume": 1234.56,
-    "change": 0.012
-    }
+By following these steps, you can explore the FastAPI Swagger UI and leverage its user-friendly interface to understand, test, and interact with the available API endpoints.
 
-## Examples
+## Conclusion <a name="conclusion"></a>
 
-Here are some examples of how to use our API to retrieve financial data:
-
-### Get Stock Data
-
-To get stock data for Apple Inc.:
-
-GET /stocks?symbol=AAPL
-This will return a JSON object with the following structure:
-
-    {
-    "symbol": "AAPL",
-    "price": 127.21,
-    "volume": 1234567,
-    "change": -0.85
-    }
-
-### Get Forex Data
-
-To get forex data for the EUR/USD currency pair:
-
-'GET' \
- 'http://127.0.0.1:8000/forex/data?to_symbol=EUR&from_symbol=USD&resolution=d&interval=1day&source=YahooFinance'
-This will return a JSON object with the following structure:
-
-    {
-    "pair": "EUR/USD",
-    "bid": 1.2034,
-    "ask": 1.2044,
-    "spread": 0.001
-    }
-
-### Get Crypto Data
-
-To get cryptocurrency data for Bitcoin:
-
-GET /crypto?symbol=BTC
-This will return a JSON object with the following structure:
-
-    {
-    "symbol": "BTC",
-    "price": 56789.01,
-    "volume": 1234.56,
-    "change": 0.012
-    }
-
-### Response Format
-
-All responses from our API are returned in JSON format. If an endpoint returns an error, the response will include an error message and a corresponding HTTP status code.
+In conclusion, please note that this project is a work in progress. While the finance SDK has been converted into an API using FastAPI, ongoing improvements and updates are being made to enhance its functionality and performance. We appreciate your understanding and encourage you to stay tuned for future updates as we continue to refine and expand this powerful finance API.
