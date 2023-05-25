@@ -39,5 +39,9 @@ class ForexSpreadResult(BaseModel):
     Points: float
    
 
-# class ForexQuoteResult(BaseModel):
-    # 0: dict
+class ForexQuote(BaseModel):
+    Last_Refreshed: datetime.datetime
+    Quote: float
+
+class ForexQuoteResult(BaseModel):
+    __root__: dict[str, ForexQuote]

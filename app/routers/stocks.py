@@ -8,27 +8,26 @@ from app.schemas.stocks import StockAnalysis, StockInterval, StockDataResult, St
 router = APIRouter(tags=["stocks"], prefix="/stocks")
 
 
-@router.get("/{symbol}", response_model=StockInfoResult)
+@router.get("/{symbol}")
 def stock_info(symbol: str):
-    info = openbb.stocks.fa.data(symbol)
-    info_todict = info.to_dict()
-    return info_todict
-
+    info = openbb.stocks.options.info(symbol)
+    # info_todict = info.to_dict()
+    # return info_todict
+    return info
 
 @router.get("/data/{symbol}", response_model=list[StockDataResult])
 def stocks_data(
-symbol: str,
-start_date: Optional[Union[datetime.datetime, str, type[None]]] = None,
-interval: Optional[StockInterval] = StockInterval.ONE_DAY,
-end_date: Optional[Union[datetime.datetime, str, type[None]]] = None,
-prepost: Optional[bool] = False, 
-source: Optional[str] = "YahooFinance",
-iexrange: Optional[str] = "ytd", 
-weekly: Optional[bool] = False,
-monthly: Optional[bool] = False, 
-verbose:Optional[bool] = True
+    symbol: str,
+    start_date: Optional[Union[datetime.datetime, str, type[None]]] = None,
+    interval: Optional[StockInterval] = StockInterval.ONE_DAY,
+    end_date: Optional[Union[datetime.datetime, str, type[None]]] = None,
+    prepost: Optional[bool] = False, 
+    source: Optional[str] = "YahooFinance", 
+    weekly: Optional[bool] = False,
+    monthly: Optional[bool] = False, 
+    verbose:Optional[bool] = True
 ):
-    stocks = openbb.stocks.load(symbol, start_date, interval.value, end_date, prepost, source, iexrange, weekly, monthly, verbose)
+    stocks = openbb.stocks.load(symbol, start_date, interval.value, end_date, prepost, source, weekly, monthly, verbose)
     stocks['time'] = stocks.index.tolist()
     stocks_todict = stocks.to_dict(orient = "records") 
     return stocks_todict

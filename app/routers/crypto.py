@@ -17,7 +17,15 @@ def crypto_info(symbol: str):
 
 
 @router.get("/data/{symbol}", response_model=list[CryptoDataResult])
-def crypto_data(symbol: str, start_date: Optional[Union[datetime.datetime, str, type[None]]] = None, interval: Optional[CryptoInterval] = CryptoInterval.ONE_DAY, exchange: Optional[str] = "kucoin", to_symbol: Optional[str] = "usdt", end_date: Optional[Union[datetime.datetime, str, type[None]]] = None, source: Optional[str] = "CCXT"):
+def crypto_data(
+    symbol: str, 
+    start_date: Optional[Union[datetime.datetime, str, type[None]]] = None, 
+    interval: Optional[CryptoInterval] = CryptoInterval.ONE_DAY, 
+    exchange: Optional[str] = "kucoin", 
+    to_symbol: Optional[str] = "usdt", 
+    end_date: Optional[Union[datetime.datetime, str, type[None]]] = None, 
+    source: Optional[str] = "CCXT"
+):
     crypto = openbb.crypto.load(symbol, start_date, interval.value, exchange, to_symbol, end_date, source)
     crypto['time'] = crypto.index.tolist()
     crypto_todict = crypto.to_dict(orient = "records")
@@ -25,7 +33,11 @@ def crypto_data(symbol: str, start_date: Optional[Union[datetime.datetime, str, 
 
 
 @router.get("/cryptospread/", response_model=list[CryptoSpreadResult])
-def crypto_spread(symbol: str, to_symbol: str, exchange: Optional[str] = "kucoin"):
+def crypto_spread(
+    symbol: str, 
+    to_symbol: str, 
+    exchange: Optional[str] = "kucoin"
+):
     data = openbb.crypto.dd.ob(exchange, symbol, to_symbol)
     df = pd.DataFrame(data)
     df_todict = df.to_dict(orient= "records")

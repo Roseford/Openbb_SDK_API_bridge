@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from openbb_terminal.sdk import openbb
-from typing import Optional
+from typing import Optional, AnyStr
 from app.schemas.news import NewsResult
 
 
@@ -10,8 +10,9 @@ router = APIRouter(tags=["news"])
 def get_news(
     term: Optional[str] = "",
     sources: Optional[str] = "",
-    sort: Optional[str] = "published"
+    tag: Optional[AnyStr] = "",
+    source: Optional[AnyStr] = ""
 ):
-    news = openbb.news(term, sources, sort)
+    news = openbb.news(term, sources, tag, source)
     news_todict = news.to_dict(orient = "records")
     return news_todict

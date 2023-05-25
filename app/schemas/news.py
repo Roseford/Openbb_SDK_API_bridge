@@ -2,6 +2,6 @@ import datetime
 from pydantic import BaseModel
 
 class NewsResult(BaseModel):
-    title: str
-    link: str
-    published: datetime.datetime
+    Date: datetime.datetime
+    Description: str
+    URL: str
